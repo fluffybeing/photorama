@@ -19,6 +19,7 @@ class PhotosViewController: UIViewController {
         super.viewDidLoad()
         
         collectionView.dataSource = photoDataSource
+        collectionView.delegate = self
         
         store.fetchRecentPhotos() {
             (photosResult) -> Void in
@@ -36,6 +37,29 @@ class PhotosViewController: UIViewController {
                 self.collectionView.reloadSections(NSIndexSet(index: 0) as IndexSet)
             }
             
+        }
+    }
+}
+
+
+extension PhotosViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        
+        let photo = photoDataSource.photos[indexPath.row]
+        
+        store.fetchImageForPhoto(photo: photo) { (result) -> Void in
+            OperationQueue.main.addOperation() {
+                
+                // Why to check?
+                // The index path for image might have changed in due request
+                // process
+                let photoIndex = self.photoDataSource.photos.index(where: { $0.photoID == $0.photoID })
+                let photoIndexPath = NSIndexPath(row: photoIndex!, section: 0) as IndexPath
+                
+                if let cell = self.collectionView.cellForItem(at: photoIndexPath) as? PhotoCollectionViewCell {
+                    cell.updateWithImage(image: photo.image)
+                }
+            }
         }
     }
 }

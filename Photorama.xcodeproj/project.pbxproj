@@ -16,6 +16,7 @@
 		B77A11B91E80782B006A005C /* PhotoStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B77A11B81E80782B006A005C /* PhotoStore.swift */; };
 		B77A11BB1E807EB1006A005C /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B77A11BA1E807EB1006A005C /* Photo.swift */; };
 		B7A1166F1EA5EA96006BCD73 /* PhotoDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A1166E1EA5EA96006BCD73 /* PhotoDataSource.swift */; };
+		B7A116761EA5F3AD006BCD73 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A116751EA5F3AD006BCD73 /* PhotoCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		B77A11B81E80782B006A005C /* PhotoStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoStore.swift; sourceTree = "<group>"; };
 		B77A11BA1E807EB1006A005C /* Photo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		B7A1166E1EA5EA96006BCD73 /* PhotoDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoDataSource.swift; sourceTree = "<group>"; };
+		B7A116751EA5F3AD006BCD73 /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +107,7 @@
 			isa = PBXGroup;
 			children = (
 				B77A11A61E8067B1006A005C /* Main.storyboard */,
+				B7A116751EA5F3AD006BCD73 /* PhotoCollectionViewCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -186,6 +189,7 @@
 				B77A11B91E80782B006A005C /* PhotoStore.swift in Sources */,
 				B75182881E825A1800189952 /* FlickrAPI.swift in Sources */,
 				B7A1166F1EA5EA96006BCD73 /* PhotoDataSource.swift in Sources */,
+				B7A116761EA5F3AD006BCD73 /* PhotoCollectionViewCell.swift in Sources */,
 				B77A11A31E8067B1006A005C /* AppDelegate.swift in Sources */,
 				B77A11BB1E807EB1006A005C /* Photo.swift in Sources */,
 			);
