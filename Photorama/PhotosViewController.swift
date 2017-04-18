@@ -24,19 +24,13 @@ class PhotosViewController: UIViewController {
         store.fetchRecentPhotos() {
             (photosResult) -> Void in
             
+            let sortByDateTaken = NSSortDescriptor(key: "dateTaken", ascending: true)
+            let allPhotos = try! self.store.fetchMainQueuePhotos(predicate: nil, sortDescriptors: [sortByDateTaken])
+            
             OperationQueue.main.addOperation() {
-                switch photosResult {
-                case .Success(let photos):
-                    print("Found Photos: \(photos.count)")
-                    self.photoDataSource.photos = photos
-                case .Failure(let error):
-                    self.photoDataSource.photos.removeAll()
-                    print(error.localizedDescription)
-                }
-                
+                self.photoDataSource.photos = allPhotos
                 self.collectionView.reloadSections(NSIndexSet(index: 0) as IndexSet)
             }
-            
         }
     }
     
@@ -52,7 +46,6 @@ class PhotosViewController: UIViewController {
         }
     }
 }
-
 
 extension PhotosViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
