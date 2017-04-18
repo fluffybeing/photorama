@@ -59,6 +59,7 @@
                                         <connections>
                                             <outlet property="imageView" destination="vmw-11-35r" id="0t3-Dg-NGC"/>
                                             <outlet property="spinner" destination="JIW-wN-5f2" id="kQQ-J0-f3c"/>
+                                            <segue destination="W0W-s4-LtP" kind="show" identifier="ShowPhoto" id="k7f-kO-0X8"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -80,6 +81,38 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="804" y="-546.47676161919048"/>
+        </scene>
+        <!--Photo Info View Controller-->
+        <scene sceneID="mvG-nS-eJ1">
+            <objects>
+                <viewController id="W0W-s4-LtP" customClass="PhotoInfoViewController" customModule="Photorama" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="m4i-ba-dlB"/>
+                        <viewControllerLayoutGuide type="bottom" id="F6V-gF-dLo"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="cSY-4j-Uah">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cmh-HJ-ibG">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="cmh-HJ-ibG" secondAttribute="bottom" id="9ah-Ln-G30"/>
+                            <constraint firstAttribute="trailing" secondItem="cmh-HJ-ibG" secondAttribute="trailing" id="DOl-8P-pgb"/>
+                            <constraint firstItem="cmh-HJ-ibG" firstAttribute="leading" secondItem="cSY-4j-Uah" secondAttribute="leading" id="cC5-Gd-1TR"/>
+                            <constraint firstItem="cmh-HJ-ibG" firstAttribute="top" secondItem="cSY-4j-Uah" secondAttribute="top" id="h7d-we-jBZ"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="imageView" destination="cmh-HJ-ibG" id="Aej-CA-aWF"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CYB-fk-Oes" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1658" y="-546"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="eIH-vE-JHN">

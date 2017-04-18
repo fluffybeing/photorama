@@ -39,6 +39,18 @@ class PhotosViewController: UIViewController {
             
         }
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ShowPhoto" {
+            if let selectedIndexPath = collectionView.indexPathsForSelectedItems?.first {
+                let photo = photoDataSource.photos[selectedIndexPath.row]
+                
+                let destinationVC = segue.destination as! PhotoInfoViewController
+                destinationVC.photo = photo
+                destinationVC.store = store
+            }
+        }
+    }
 }
 
 
@@ -53,8 +65,8 @@ extension PhotosViewController: UICollectionViewDelegate {
                 // Why to check?
                 // The index path for image might have changed in due request
                 // process
-                let photoIndex = self.photoDataSource.photos.index(where: { $0.photoID == $0.photoID })
-                let photoIndexPath = NSIndexPath(row: photoIndex!, section: 0) as IndexPath
+                let photoIndex = self.photoDataSource.photos.index(where: { $0.photoID == photo.photoID })
+                let photoIndexPath = IndexPath(row: photoIndex!, section: 0)
                 
                 if let cell = self.collectionView.cellForItem(at: photoIndexPath) as? PhotoCollectionViewCell {
                     cell.updateWithImage(image: photo.image)
