@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreData
 
 enum Method: String {
     case RecentPhotos = "flickr.photos.getRecent"
@@ -64,7 +65,7 @@ struct FlickrAPI {
         return flickrURL(method: .RecentPhotos, parameter: ["extras": "url_h,date_taken"])
     }
 
-    static func photoFromJSONData(data: Data) -> PhotoResult {
+    static func photoFromJSONData(data: Data, inContext context: NSManagedObjectContext) -> PhotoResult {
         do {
             let jsonObject = try JSONSerialization.jsonObject(with: data, options: [])
 
@@ -79,7 +80,7 @@ struct FlickrAPI {
             // Create an array of Photo
             var finalPhotos = [Photo]()
             for photoJSON in photoArray {
-                if let photo = photoFromJSONObject(json: photoJSON) {
+                if let photo = photoFromJSONObject(json: photoJSON, inContext: context) {
                     finalPhotos.append(photo)
                 }
             }
@@ -98,7 +99,8 @@ struct FlickrAPI {
         }
     }
 
-    private static func photoFromJSONObject(json: [String: AnyObject]) -> Photo? {
+    private static func photoFromJSONObject(json: [String: AnyObject], inContext context: NSManagedObjectContext) -> Photo? {
+        
         guard let photoID = json["id"] as? String,
             let title = json["title"] as? String,
             let dateString = json["datetaken"] as? String,
@@ -107,6 +109,17 @@ struct FlickrAPI {
             let dateTaken = dateFormatter.date(from: dateString) else {
                 return nil
             }
-        return Photo(title: title, remoteURL: url, photoID: photoID, dateTaken: dateTaken)
+        
+        var photo: Photo!
+        context.performAndWait() {
+            photo = NSEntityDescription.insertNewObject(forEntityName: "Photo", into: context) as! Photo
+            
+            photo.title = title
+            photo.photoID = photoID
+            photo.remoteURL = url as NSURL
+            photo.dateTaken = dateTaken as NSDate
+        }
+        
+        return photo
     }
 }
